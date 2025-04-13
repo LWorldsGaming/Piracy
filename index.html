@@ -11,10 +11,11 @@
 
         * {
             font-family: "Poppins", sans-serif;
+            color: #FFFFFF;
         }
 
         body {
-            background-color: #f5f5f5;
+            background-color: #000000;
             margin: 0;
             padding: 0;
             min-height: 100vh;
@@ -26,7 +27,7 @@
             justify-content: center;
             justify-items: center;
             padding: 20px;
-            background-color: #fff;
+            background-color: #000000;
         }
 
         .main {
@@ -45,9 +46,9 @@
             justify-items: center;
             padding: 25px;
             width: 45%;
-            background-color: #fff;
+            background-color: #40404040;
             border-radius: 10px;
-            box-shadow: 0 0 10px #404040;
+            border: #404040DD 2px solid;
         }
 
         .tutorials {
@@ -59,15 +60,15 @@
             margin: 20px;
             margin-left: 25%;
             width: 45%;
-            background-color: #fff;
+            background-color: #40404040;
             border-radius: 10px;
-            box-shadow: 0 0 10px #404040;
+            border: #404040DD 2px solid;
         }
 
         a {
             transition: transform 0.15s ease;
             text-decoration: none;
-            color: #3F3F3F;
+            color: #0085C5;
             margin: 10px 0;
         }
 
@@ -79,7 +80,7 @@
             position: fixed;
             width: 10px;
             height: 10px;
-            background-color: #404040;
+            background-color: #0080ff;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
@@ -89,6 +90,17 @@
                 width 0.3s ease,
                 height 0.3s ease;
             will-change: transform;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+
+        h1:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+            transition: all 0.5s ease;
+            color: #00000000;
+            -webkit-text-stroke: 0.1vh #FFFFFFFF;
         }
     </style>
 </head>
@@ -115,8 +127,8 @@
     </div>
     <div class="tutorials">
         <h3>Tutorials for game unlockers</h3>
-        <a href="./SteamTools.md">SteamTools Tutorial</a>
-        <a href="./GreenLuma.md">GreenLuma Tutorial</a>
+        <a href="./webpage/SteamTools.md">SteamTools Tutorial</a>
+        <a href="./webpage/GreenLuma.md">GreenLuma Tutorial</a>
     </div>
 </body>
 <script>
@@ -145,13 +157,14 @@
         el.addEventListener('mouseenter', () => {
             follower.style.transform = 'translate(-50%, -50%) scale(2)';
             follower.style.background = 'rgba(0, 0, 0, 0)';
-            follower.style.border = '#404040 1px solid';
+            follower.style.border = '#0080ff 1px solid';
         });
 
         el.addEventListener('mouseleave', () => {
             follower.style.transform = 'translate(-50%, -50%) scale(1)';
-            follower.style.background = '#404040';
+            follower.style.background = '#0080ff';
         });
     });
 </script>
+
 </html>
