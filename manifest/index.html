@@ -103,9 +103,14 @@
             }
         });
         if (response.status === 200) {
-            window.open(url, "_self");
-        }
-        else {
+            const blob = await response.blob();
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `${AppID}.zip`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        } else {
             alert("AppID not found!");
         }
     }
