@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Forbidden Index</title>
+    <title>blackbay</title>
     <link rel="icon" href="./webpage/icon.png" type="icon/x-image">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -28,6 +28,7 @@
             justify-items: center;
             padding: 20px;
             background-color: #000000;
+            gap: 1rem;
         }
 
         .main {
@@ -111,12 +112,32 @@
             color: #00000000;
             -webkit-text-stroke: 0.1vh #FFFFFFFF;
         }
+
+        .discordBtn {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            margin: 1rem;   
+        }
+
+        button {
+            background-color: #40404040;
+            border-radius: 5px;
+            border: #404040DD 2px solid;
+            padding: 10px 20px;
+            transition: all 0.5s ease;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+        }
     </style>
 </head>
 
 <body>
     <div class="cursor-follower"></div>
     <header>
+        <button class="discordBtn" onclick="joinDiscord()">Join Discord</button>
         <h1>The Ultimate Piracy Guide</h1>
     </header>
     <div class="main">
@@ -130,8 +151,8 @@
         </div>
         <div class="steam">
             <h3>Steam game unlockers</h3>
-            <a href="https://github.com/LWorldsGaming/Piracy/releases/download/1.0/st-setup-1.8.16.zip">SteamTools</a>
-            <a href="https://github.com/LWorldsGaming/Piracy/releases/download/1.0/GreenLuma.1.6.3.zip">GreenLuma</a>
+            <a href="https://github.com/plxt79/blackbay/releases/download/1.0/st-setup-1.8.16.zip">SteamTools</a>
+            <a href="https://github.com/plxt79/blackbay/releases/download/1.0/GreenLuma.1.6.3.zip">GreenLuma</a>
         </div>
     </div>
     <div class="tutorials">
@@ -174,6 +195,11 @@
             follower.style.background = '#0080ff';
         });
     });
+
+    function joinDiscord() {
+        var URL = "https://discord.gg/ntygYf3Ygj"
+        open(URL, "_new")
+    }
 </script>
 
 </html>
