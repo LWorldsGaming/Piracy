@@ -66,6 +66,13 @@
             padding: 10px 20px;
             transition: all 0.5s ease;
         }
+
+        #homeBtn {
+            position: fixed;
+            left: 0;
+            top: 0;
+            margin: 1rem;
+        }
     </style>
 </head>
 
@@ -76,23 +83,20 @@
     <button id="homeBtn" onclick="home()">Home</button>
     <div class="generator">
         <div class="input">
-            <input name="AppID" id="AppIDInput" placeholder="appid goes">
+            <input id="AppIDInput" placeholder="appid goes here">
             <button type="submit" onclick="generate()">Submit</button>
         </div>
     </div>
 </body>
 <script>
     function generate() {
-        let AppID = document.getElementsByName("AppID").value;
+        let AppID = document.getElementById("AppIDInput").value;
         const url = `https://github.com/plxt79/database/raw/refs/heads/main/Games%20ZIPs/${AppID}.zip`;
-
-        // Inform user about the process
-        console.log("Generating...");
 
         try {
             const response = fetch(url, { method: 'GET' });
             if (response.status === 200) {
-                window.open(url, "_self");  // Opens the URL in the current tab
+                window.open(url, "_self");
             } else {
                 alert("AppID not found!");
             }
