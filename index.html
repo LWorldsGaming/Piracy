@@ -80,7 +80,7 @@
             position: fixed;
             width: 10px;
             height: 10px;
-            background-color: #0080ff;
+            background-color: #0080ff00;
             border-radius: 50%;
             pointer-events: none;
             z-index: 9999;
@@ -169,6 +169,7 @@
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
+        follower.style.background = "#0080ff";
     });
 
     function animateFollower() {
