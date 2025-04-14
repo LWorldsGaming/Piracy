@@ -1,0 +1,104 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        blackbay Manifest Generator
+    </title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        * {
+            font-family: "Poppins", sans-serif;
+            color: #FFFFFF;
+            transition: all 0.5s ease;
+        }
+
+        body {
+            background-color: #000000;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            align-items: center;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .generator {
+            display: grid;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            padding: 25px;
+            margin: 20px auto;
+            width: 25%;
+            background-color: #40404040;
+            border-radius: 10px;
+            border: #404040DD 2px solid;
+        }
+
+        button {
+            background-color: #40404040;
+            border-radius: 5px;
+            border: #404040DD 2px solid;
+            padding: 10px 20px;
+            transition: all 0.5s ease;
+        }
+
+        button:hover {
+            transform: scale(1.2);
+        }
+
+        input {
+            background-color: #40404040;
+            border-radius: 5px;
+            border: #404040DD 2px solid;
+            padding: 10px 20px;
+            transition: all 0.5s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <h1>blackbay Manifest Generator</h1>
+    </div>
+    <div class="generator">
+        <div class="input">
+            <input name="AppID" id="AppIDInput" placeholder="appid goes">
+            <button type="submit" onclick="generate()">Submit</button>
+        </div>
+    </div>
+</body>
+<script>
+    function generate() {
+        let AppID = document.getElementsByName("AppID").value;
+        const url = `https://github.com/plxt79/database/raw/refs/heads/main/Games%20ZIPs/${AppID}.zip`;
+
+        // Inform user about the process
+        console.log("Generating...");
+
+        try {
+            const response = fetch(url, { method: 'GET' });
+            if (response.status === 200) {
+                window.open(url, "_self");  // Opens the URL in the current tab
+            } else {
+                alert("AppID not found!");
+            }
+        } catch (error) {
+            console.error('Error fetching URL:', error);
+            alert("An error occurred while fetching the URL.");
+        }
+    }
+</script>
+</html>
