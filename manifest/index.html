@@ -95,6 +95,7 @@
             <input id="AppIDInput" type="number" placeholder="AppID goes here">
             <button type="submit" onclick="generate()">Submit</button>
         </div>
+        <p>Total files: <span id="file-count">Loading...</span></p>
     </div>
 </body>
 <script>
@@ -129,6 +130,20 @@
     function home() {
         open("../", "_self")
     }
+
+    async function getFileCount() {
+        const apiUrl = "https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs";
+
+        try {
+            const response = await fetch(apiUrl);
+            const data = await response.json();
+            const fileCount = Array.isArray(data) ? data.length : 0;
+            document.getElementById("file-count").textContent = fileCount;
+        } catch (error) {
+            document.getElementById("file-count").textContent = "Error";
+        }
+    }
+    getFileCount();
 </script>
 
 </html>
