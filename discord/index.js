@@ -1,0 +1,1 @@
+window.open("https://discord.gg/ntygYf3Ygj", "_new")
