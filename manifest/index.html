@@ -96,7 +96,12 @@
         let AppID = document.getElementById("AppIDInput").value;
         const url = `https://github.com/plxt79/database/releases/download/1.0/${AppID}.zip`;
 
-        const response = await fetch(url, {method: 'GET'});
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'User-Agent': 'Mozilla/5.0'
+            }
+        });
         if (response === 200) {
             window.open(url, "_self");
         }
