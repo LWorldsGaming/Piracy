@@ -73,6 +73,7 @@
     <div class="main">
         <h1>blackbay Manifest Generator</h1>
     </div>
+    <button id="discordBtn" onclick="joinDiscord()">Join Discord</button>
     <div class="generator">
         <div class="input">
             <input name="AppID" id="AppIDInput" placeholder="appid goes">
@@ -99,6 +100,10 @@
             console.error('Error fetching URL:', error);
             alert("An error occurred while fetching the URL.");
         }
+    }
+
+    function home() {
+        open("/", "_self")
     }
 </script>
 </html>
