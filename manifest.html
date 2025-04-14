@@ -20,6 +20,10 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            justify-items: center;
+            align-items: center;
         }
 
         .main {
@@ -30,8 +34,9 @@
             margin: 0 auto;
         }
 
-        .input {
+        .generator {
             display: grid;
+            align-content: center;
             justify-content: center;
             justify-items: center;
             padding: 25px;
@@ -68,12 +73,32 @@
     <div class="main">
         <h1>blackbay Manifest Generator</h1>
     </div>
-
-    <div class="input">
-        <input name="AppID" id="AppIDInput" placeholder="appid goes">
-        <button type="submit">Submit</button>
+    <div class="generator">
+        <div class="input">
+            <input name="AppID" id="AppIDInput" placeholder="appid goes">
+            <button type="submit" onclick="generate()">Submit</button>
+        </div>
     </div>
-
 </body>
+<script>
+    async function generate() {
+        let AppID = document.getElementById(AppIDInput).value;
+        const url = `https://github.com/plxt79/database/raw/refs/heads/main/Games%20ZIPs/${AppID}.zip`;
 
+        // Inform user about the process
+        console.log("Generating...");
+
+        try {
+            const response = await fetch(url, { method: 'HEAD' });
+            if (response.status === 200) {
+                window.open(url, "_self");  // Opens the URL in the current tab
+            } else {
+                alert("AppID not found!");
+            }
+        } catch (error) {
+            console.error('Error fetching URL:', error);
+            alert("An error occurred while fetching the URL.");
+        }
+    }
+</script>
 </html>
