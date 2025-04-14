@@ -94,7 +94,7 @@
 <script>
     async function generate() {
         let AppID = document.getElementById("AppIDInput").value;
-        const url = `https://github.com/plxt79/database/releases/download/1.0/${AppID}.zip`;
+        const url = `https://raw.githubusercontent.com/plxt79/database/main/Games ZIPs/${AppID}.zip`;
 
         const response = await fetch(url, {
             method: 'GET',
@@ -102,7 +102,7 @@
                 'User-Agent': 'Mozilla/5.0'
             }
         });
-        if (response === 200) {
+        if (response.status === 200) {
             window.open(url, "_self");
         }
         else {
