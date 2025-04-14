@@ -76,6 +76,16 @@
             top: 0;
             margin: 1rem;
         }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
     </style>
 </head>
 
@@ -86,7 +96,7 @@
     <button id="homeBtn" onclick="home()">Home</button>
     <div class="generator">
         <div class="input">
-            <input id="AppIDInput" placeholder="appid goes here">
+            <input id="AppIDInput" type="number" placeholder="appid goes here">
             <button type="submit" onclick="generate()">Submit</button>
         </div>
     </div>
@@ -94,24 +104,29 @@
 <script>
     async function generate() {
         let AppID = document.getElementById("AppIDInput").value;
-        const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
+        if (AppID !== "") {
+            const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
 
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'User-Agent': 'Mozilla/5.0'
+            const response = await fetch(url, {
+                method: 'GET',
+                headers: {
+                    'User-Agent': 'Mozilla/5.0'
+                }
+            });
+            if (response.status === 200) {
+                const blob = await response.blob();
+                const link = document.createElement("a");
+                link.href = window.URL.createObjectURL(blob);
+                link.download = `${AppID}.zip`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert("AppID not found!");
             }
-        });
-        if (response.status === 200) {
-            const blob = await response.blob();
-            const link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `${AppID}.zip`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        } else {
-            alert("AppID not found!");
+        }
+        else {
+            alert("Input cannot be empty!");
         }
     }
 
@@ -119,4 +134,5 @@
         open("../", "_self")
     }
 </script>
+
 </html>
