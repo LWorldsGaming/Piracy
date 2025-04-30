@@ -182,7 +182,12 @@
     }
   });
 
-  document.addEventListener('contextmenu', event => event.preventDefault());
+  window.addEventListener('mousedown', function (e) {
+    if (e.button === 2) {
+      e.preventDefault();
+      alert("Right-click is blocked.");
+    }
+  });
 </script>
 
 </html>
