@@ -17,6 +17,16 @@ body {
     align-items: center;
 }
 
+header {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    background-color: #40404040;
+    gap: 1rem;
+    margin-bottom: 25px;
+    border-bottom: #404040DD 2px solid;
+}
+
 .main {
     display: flex;
     justify-content: center;
