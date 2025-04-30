@@ -175,6 +175,14 @@
     function requestpage() {
         open("https://blackbay.vercel.app/manifest/request", "_self")
     }
+
+    document.addEventListener('keydown', function(e) {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('contextmenu', event => event.preventDefault());
 </script>
 
 </html>
