@@ -48,7 +48,7 @@ button {
 }
 
 button:hover {
-    transform: scale(1.2);
+    border: #0080ff 2px solid;
 }
 
 input {
@@ -58,6 +58,10 @@ input {
     padding: 10px 20px;
     transition: all 0.5s ease;
     margin: 1rem;
+}
+
+input:focus {
+    outline: #0080ff 2px solid;
 }
 
 input[type=number]::-webkit-inner-spin-button,

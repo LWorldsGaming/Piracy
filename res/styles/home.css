@@ -127,5 +127,5 @@ button {
 }
 
 button:hover {
-    transform: scale(1.2);
+    border: #0080ff 2px solid;
 }
