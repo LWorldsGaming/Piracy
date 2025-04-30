@@ -93,3 +93,19 @@ h6:hover {
     top: 0;
     margin: 1rem;
 }
+
+.cursor-follower {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    background-color: #0080ff;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition:
+        transform 0.15s ease-out,
+        width 0.3s ease,
+        height 0.3s ease;
+    will-change: transform;
+}
