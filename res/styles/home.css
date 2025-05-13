@@ -22,10 +22,11 @@ header {
     border-bottom: #404040DD 2px solid;
 }
 
-.main {
+.main,
+.main2 {
     display: flex;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 6px 3px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -43,17 +44,32 @@ header {
     border: #404040DD 2px solid;
 }
 
-.tutorials {
+.tutorials,
+.stuff {
     display: grid;
     align-content: center;
     justify-content: center;
     justify-items: center;
     padding: 25px;
-    margin: 20px auto;
     width: 45%;
     background-color: #40404040;
     border-radius: 10px;
     border: #404040DD 2px solid;
+}
+
+.link-grid {
+    display: flex;
+    flex-wrap: wrap;    
+    max-width: 40vh;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 3.5vh;
+}
+
+.link-grid a {
+    width: calc(50% - 5px);
+    box-sizing: border-box;
 }
 
 a {
