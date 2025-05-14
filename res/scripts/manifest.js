@@ -83,7 +83,7 @@ async function getFileCount() {
 getFileCount();
 
 function requestpage() {
-    open("https://blackbay.vercel.app/manifest/request", "_self")
+    open("./request", "_self")
 }
 
 document.addEventListener('keydown', function (e) {

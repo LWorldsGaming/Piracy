@@ -33,11 +33,11 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 function joinDiscord() {
-    var URL = "https://blackbay.vercel.app/discord"
+    var URL = "/discord"
     open(URL, "_new")
 }
 
 function manifestGen() {
-    var URL = "https://blackbay.vercel.app/manifest"
+    var URL = "/manifest"
     open(URL, "_self")
 }
