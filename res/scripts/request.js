@@ -90,5 +90,11 @@ function syncUserIDWidth() {
     userInput.style.width = totalWidth + "px";
 }
 
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        request();
+    }
+});
+
 window.addEventListener("load", syncUserIDWidth);
 window.addEventListener("resize", syncUserIDWidth);
