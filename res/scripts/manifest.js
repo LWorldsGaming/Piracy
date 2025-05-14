@@ -53,7 +53,6 @@ async function generate() {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            setTimeout(1500);
             
             document.getElementById('genAppID').disabled = false;
         } else {
