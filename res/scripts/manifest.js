@@ -95,3 +95,9 @@ window.addEventListener('mousedown', function (e) {
         alert("Right-click is disabled here.");
     }
 });
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        generate();
+    }
+});
