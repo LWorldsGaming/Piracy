@@ -36,6 +36,7 @@ async function request() {
     const appid = document.getElementById("AppIDInput").value.trim();
     const userid = document.getElementById("UserIDInput").value.trim();
     if (!appid) return alert("Please enter a valid AppID");
+    if (userid === "") return alert("Please enter your Discord UserID");
 
     const filename = `${appid}.zip`;
 
