@@ -83,7 +83,7 @@ async function getFileCount() {
 getFileCount();
 
 function requestpage() {
-    open("./request", "_self")
+    open("/manifest/request", "_self")
 }
 
 document.addEventListener('keydown', function (e) {
