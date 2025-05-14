@@ -6,6 +6,10 @@
     transition: all 0.5s ease;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: #000000;
     margin: 0;
@@ -29,6 +33,19 @@ header {
     gap: 1rem;
     margin-bottom: 2rem;
     border-bottom: #404040DD 2px solid;
+}
+
+footer {
+    position: absolute;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    background-color: #40404040;
+    gap: 1rem;
+    margin-top: 2rem;
+    border-top: #404040DD 2px solid;
+    bottom: 0;
+    min-width: 100%;
 }
 
 .generator {
