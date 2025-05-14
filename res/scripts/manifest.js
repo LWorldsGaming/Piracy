@@ -1,3 +1,5 @@
+isProcessing = false;
+
 const follower = document.querySelector('.cursor-follower');
 let mouseX = 0, mouseY = 0;
 let posX = 0, posY = 0;
@@ -33,6 +35,15 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 async function generate() {
+    isProcessing = true;
+
+    if (isProcessing) {
+        document.getElementById('genAppID').disabled = true;
+    }
+    else {
+        document.getElementById('genAppID').disabled = false;
+    }
+
     let AppID = document.getElementById("AppIDInput").value;
     if (AppID !== "") {
         const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
@@ -51,6 +62,7 @@ async function generate() {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+            isProcessing = false;
         } else {
             alert("AppID unavailable!");
         }
