@@ -1,6 +1,3 @@
-// api/filecount.js
-import fetch from 'node-fetch';
-
 const OWNER = 'plxt79';
 const REPO = 'database';
 const FOLDER_PATH = 'Games ZIPs';
