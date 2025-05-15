@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Missing appid' });
   }
 
-  const apiUrl = `https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs/${appid}.zip`;
+  const apiUrl = `https://api.github.com/repos/plxt79/database/contents/${encodeURIComponent('Games ZIPs')}/${appid}.zip`;
 
   try {
     const apiRes = await fetch(apiUrl, {
