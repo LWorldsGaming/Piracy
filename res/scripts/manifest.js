@@ -97,35 +97,7 @@ function home() {
     }
 }*/
 async function getFileCount() {
-    const owner = 'plxt79';
-    const repo = 'blackbay';
-    const branch = 'public';
-    const token = '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'; // 👈 Replace this with your GitHub token
-
-    const headers = {
-        'Authorization': `token ${token}`,
-        'Accept': 'application/vnd.github.v3+json'
-    };
-
-    try {
-        // Step 1: Get the SHA of the branch
-        const branchRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/${branch}`, { headers });
-        const branchData = await branchRes.json();
-        const treeSha = branchData.commit.commit.tree.sha;
-
-        // Step 2: Get the full file tree recursively
-        const treeRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSha}?recursive=1`, { headers });
-        const treeData = await treeRes.json();
-
-        // Step 3: Count blobs (files)
-        const fileCount = treeData.tree.filter(item => item.type === 'blob').length;
-
-        // Update UI
-        document.getElementById('file-count').textContent = fileCount;
-    } catch (err) {
-        console.error('Error:', err);
-        document.getElementById('file-count').textContent = 'Error';
-    }
+    
 }
 
 getFileCount();
