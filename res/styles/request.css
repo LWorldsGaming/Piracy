@@ -64,6 +64,7 @@ input {
     padding: 10px 20px;
     transition: all 0.5s ease;
     margin: 1rem;
+    text-align: center;
 }
 
 input:focus {
@@ -84,7 +85,7 @@ h5,
 h6 {
     color: #ffffff;
     transition: all 0.5s ease;
-    outline: 0.1vh #FFFFFFFF;
+    -webkit-text-stroke: 0.1vh transparent;
 }
 
 h1:hover,
@@ -93,7 +94,8 @@ h3:hover,
 h4:hover,
 h5:hover,
 h6:hover {
-    color: #00000000;
+    -webkit-text-stroke: 0.1vh #FFFFFFFF;
+    color: transparent;
 }
 
 #backBtn {
