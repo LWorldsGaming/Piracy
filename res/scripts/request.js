@@ -46,6 +46,13 @@ async function request() {
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
         return
     }
+    if (!userid && !appid) {
+        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
+    }
 
     const filename = `${appid}.zip`;
 
