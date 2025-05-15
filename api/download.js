@@ -2,6 +2,13 @@ export default async function handler(req, res) {
   const { appid } = req.query;
   const GITHUB_TOKEN = process.env.GEN_TOKEN;
 
+  const allowedOrigin = 'https://blackbay.vercel.app';
+  const origin = req.headers.origin || req.headers.referer || '';
+
+  if (!origin.startsWith(allowedOrigin)) {
+    return res.status(403).json({ error: '403 Forbidden: Not Allowed' });
+  }
+
   if (!appid) {
     res.status(400).json({ error: 'Missing appid' });
     return;
