@@ -19,7 +19,7 @@ function animateFollower() {
 
 animateFollower();
 
-function showToast(message, duration, backgroundColor) {
+function showToast(message, backgroundColor, duration = 2) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.style.opacity = "1";
@@ -28,7 +28,7 @@ function showToast(message, duration, backgroundColor) {
 
     setTimeout(() => {
         toast.style.opacity = "0";
-    }, duration);
+    }, duration * 1000);
 }
 
 document.querySelectorAll('a, button, a').forEach(el => {
@@ -68,10 +68,11 @@ async function generate() {
             
             document.getElementById('genAppID').disabled = false;
         } else {
-            showToast('AppID unavailable!', 2000, '#FF0000');
+            showToast('AppID unavailable!', '#FF0000');
         }
     }
     else {
+        showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
         return

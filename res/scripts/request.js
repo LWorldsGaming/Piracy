@@ -19,7 +19,7 @@ function animateFollower() {
 
 animateFollower();
 
-function showToast(message, duration, backgroundColor) {
+function showToast(message, backgroundColor, duration = 2) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.style.opacity = "1";
@@ -28,7 +28,7 @@ function showToast(message, duration, backgroundColor) {
 
     setTimeout(() => {
         toast.style.opacity = "0";
-    }, duration);
+    }, duration * 1000);
 }
 
 document.querySelectorAll('a, button, a').forEach(el => {
@@ -49,6 +49,7 @@ async function request() {
     const appid = document.getElementById("AppIDInput").value.trim();
 
     if (!userid && !appid) {
+        showToast('Please fill all fields.', '#FF0000');
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
@@ -56,11 +57,13 @@ async function request() {
         return
     }
     if (!userid) {
+        showToast('Please fill all fields.', '#FF0000');
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
         return
     }
     if (!appid) {
+        showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
         return
@@ -71,7 +74,7 @@ async function request() {
     try {
         const res = await fetch(`https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${filename}`, { method: 'HEAD' });
         if (res.status === 200) {
-            showToast("Game already available.", 2000, "#FFFF00");
+            showToast("Game already available.", "#FFFF00");
 
             document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
             setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
@@ -102,10 +105,12 @@ async function request() {
     });
 
     if (webhookRes.ok) {
+        showToast('Request sent!', '#00FF00')
         document.getElementById("AppIDInput").value = "";
         document.getElementById("submitRequest").style.borderColor = '#00FF00'
         setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 1000);
     } else {
+        showToast('An error occured.', '#FF0000')
         document.getElementById("submitRequest").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 1000);
     }
