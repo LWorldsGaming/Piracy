@@ -1,29 +1,26 @@
 import fetch from 'node-fetch';
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // set this in your env
-
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // your GitHub token here
 const OWNER = 'plxt79';
 const REPO = 'database';
-const PATH = 'main'; // folder path you want to count files in
+const PATH = 'Games ZIPs';
 
 async function getFileCount(owner, repo, path) {
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}/Games%20ZIPs`;
-
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${encodeURIComponent(path)}`;
+  
   const res = await fetch(url, {
     headers: {
       'Authorization': `token ${GITHUB_TOKEN}`,
       'Accept': 'application/vnd.github.v3+json',
     },
   });
-
+  
   if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
 
   const data = await res.json();
 
-  // data is an array of file/folder objects in that path
-  // count files only (ignore folders if you want)
+  // Count only files (type === 'file')
   const fileCount = data.filter(item => item.type === 'file').length;
-
   return fileCount;
 }
 
