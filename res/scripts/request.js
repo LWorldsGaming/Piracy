@@ -31,7 +31,6 @@ function showToast(message, duration, backgroundColor) {
     }, duration);
 }
 
-
 document.querySelectorAll('a, button, a').forEach(el => {
     el.addEventListener('mouseenter', () => {
         follower.style.transform = 'translate(-50%, -50%) scale(2)';
@@ -113,7 +112,7 @@ async function request() {
 }
 
 function back() {
-    open("./", "_self")
+    open("..", "_self")
 }
 
 function syncUserIDWidth() {

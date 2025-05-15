@@ -19,6 +19,18 @@ function animateFollower() {
 
 animateFollower();
 
+function showToast(message, duration, backgroundColor) {
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.style.opacity = "1";
+    toast.style.backgroundColor = backgroundColor;
+    toast.style.color = "#000000"
+
+    setTimeout(() => {
+        toast.style.opacity = "0";
+    }, duration);
+}
+
 document.querySelectorAll('a, button, a').forEach(el => {
     el.addEventListener('mouseenter', () => {
         follower.style.transform = 'translate(-50%, -50%) scale(2)';
@@ -35,8 +47,8 @@ document.querySelectorAll('a, button, a').forEach(el => {
 async function generate() {
     document.getElementById('genAppID').disabled = true;
 
-    let AppID = document.getElementById("AppIDInput").value;
-    if (AppID !== "") {
+    const AppID = document.getElementById("AppIDInput").value.trim();
+    if (!AppID) {
         const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
 
         const response = await fetch(url, {
@@ -56,11 +68,13 @@ async function generate() {
             
             document.getElementById('genAppID').disabled = false;
         } else {
-            alert("AppID unavailable!");
+            showToast('AppID unavailable!', 2000, '#FF0000');
         }
     }
     else {
-        alert("Input cannot be empty!");
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
     }
 }
 
