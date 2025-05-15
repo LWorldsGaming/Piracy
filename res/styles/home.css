@@ -107,8 +107,7 @@ h5,
 h6 {
     color: #ffffff;
     transition: all 0.5s ease;
-    stroke: #FFFFFFFF;
-    stroke-width: 0.1vh;
+    -webkit-text-stroke: 0.1vh #FFFFFFFF;
 }
 
 h1:hover,
