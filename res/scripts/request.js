@@ -24,6 +24,7 @@ function showToast(message, duration, backgroundColor) {
     toast.textContent = message;
     toast.style.opacity = "1";
     toast.style.backgroundColor = backgroundColor;
+    toast.style.color = "#000000"
 
     setTimeout(() => {
         toast.style.opacity = "0";
