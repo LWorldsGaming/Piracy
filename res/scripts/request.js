@@ -63,7 +63,7 @@ async function request() {
         const res = await fetch(`https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${filename}`, { method: 'HEAD' });
         if (res.status === 200) {
             Toastify({
-                text: "Game already available.", duration: 3000, gravity: "bottom", position: "center", backgroundColor: "#FFFF00"
+                text: "Game already available.", duration: 2000, gravity: "bottom", position: "center", backgroundColor: "#FFFF00"
             }).showToast();
 
             document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
