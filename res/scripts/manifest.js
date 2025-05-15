@@ -54,10 +54,13 @@ async function generate() {
     }
     document.getElementById('genAppID').disabled = true;
 
-    // Call your backend API, which will add token and fetch the file
     const url = `/api/download?appid=${encodeURIComponent(AppID)}`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest',
+        }
+    });
     if (response.status === 200) {
         const blob = await response.blob();
         const link = document.createElement("a");
