@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'; // optional in old Node, but recommended in some envs
-
 export default async function handler(req, res) {
   const { appid } = req.query;
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
