@@ -78,10 +78,7 @@ async function generate() {
         link.click();
         document.body.removeChild(link);
 
-        if (isGenerating) {
-            document.getElementById("genAppID").style.borderColor = '#FFFF00'
-        }
-        else {
+        if (!isGenerating) {
             document.getElementById("genAppID").style.borderColor = ""
         }
 
