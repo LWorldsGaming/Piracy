@@ -84,18 +84,6 @@ function home() {
     open("/", "_self")
 }
 
-/*async function getFileCount() {
-    const apiUrl = "https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs";
-
-    try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-        const fileCount = Array.isArray(data) ? data.length : 0;
-        document.getElementById("file-count").textContent = fileCount;
-    } catch (error) {
-        document.getElementById("file-count").textContent = "Error";
-    }
-}*/
 async function getFileCount() {
     fetch('https://blackbay.vercel.app/api/filecount')
         .then(res => res.json())
