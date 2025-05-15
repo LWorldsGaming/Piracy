@@ -84,7 +84,7 @@ function home() {
     open("/", "_self")
 }
 
-async function getFileCount() {
+/*async function getFileCount() {
     const apiUrl = "https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs";
 
     try {
@@ -95,7 +95,20 @@ async function getFileCount() {
     } catch (error) {
         document.getElementById("file-count").textContent = "Error";
     }
+}*/
+async function getFileCount() {
+    fetch('https://raw.githubusercontent.com/plxt79/blackbay/public/res/file-count.json')
+        .then(response => response.json())
+        .then(data => {
+            const fileCount = data["file-count"];
+            document.getElementById('file-count').textContent = fileCount;
+        })
+        .catch(error => {
+            console.error("Error fetching file-count:", error);
+            document.getElementById('file-count').textContent = "Error";
+        });
 }
+
 getFileCount();
 
 function requestpage() {
