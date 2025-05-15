@@ -1,6 +1,15 @@
 export default async function handler(req, res) {
     const { appid } = req.query;
     const GITHUB_TOKEN = process.env.GEN_TOKEN;
+    const referer = req.headers.referer || '';
+
+    if (!referer.startsWith('https://blackbay.vercel.app')) {
+        return res.status(403).json({ error: 'Access denied' });
+    }
+
+    if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
+        return res.status(403).json({ error: 'Access denied' });
+    }
 
     if (!appid) {
         return res.status(400).json({ error: 'Missing AppID' });
