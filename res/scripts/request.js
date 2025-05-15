@@ -52,6 +52,7 @@ async function request() {
             alert("This game is already available!");
             document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
             setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+            return
         }
     } catch (e) {
         return alert("Could not check file status.");
