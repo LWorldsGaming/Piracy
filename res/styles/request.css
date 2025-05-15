@@ -68,8 +68,8 @@ input {
 }
 
 input:focus {
-    border-color: transparent;
-    outline: #0080ff 2px solid;
+    border: #0080ff 2px solid;
+    outline: transparent;
 }
 
 input[type=number]::-webkit-inner-spin-button,
