@@ -19,7 +19,7 @@ function animateFollower() {
 
 animateFollower();
 
-function showToast(message, backgroundColor, duration = 2) {
+function showToast(message, backgroundColor, duration = 1) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.style.opacity = "1";
@@ -52,20 +52,20 @@ async function request() {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 2000);
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 2000);
+        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = ""; }, 1000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1000);
         return
     }
     if (!userid) {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 2000);
+        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = ""; }, 1000);
         return
     }
     if (!appid) {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 2000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1000);
         return
     }
 
@@ -77,7 +77,7 @@ async function request() {
             showToast("Game already available.", "#FFFF00");
 
             document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
-            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 2000);
+            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1000);
             return
         }
     } catch (e) {
@@ -108,16 +108,16 @@ async function request() {
         showToast('Request sent!', '#00FF00')
         document.getElementById("AppIDInput").value = "";
         document.getElementById("submitRequest").style.borderColor = '#00FF00'
-        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 2000);
+        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = ""; }, 1000);
     } else {
         showToast('An error occured.', '#FF0000')
         document.getElementById("submitRequest").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 2000);
+        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = ""; }, 1000);
     }
 }
 
 function back() {
-    open("..", "_self")
+    open("/manifest", "_self")
 }
 
 function syncUserIDWidth() {
