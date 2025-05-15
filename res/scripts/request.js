@@ -70,8 +70,9 @@ async function request() {
     });
 
     if (webhookRes.ok) {
-        alert("Request sent!");
         document.getElementById("AppIDInput").value = "";
+        document.getElementById("submitRequest").style.borderColor = '#00FF00'
+        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 1000);
     } else {
         alert("Failed to send request.");
     }
