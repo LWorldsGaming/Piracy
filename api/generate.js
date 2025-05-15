@@ -1,33 +1,32 @@
 export default async function handler(req, res) {
-    const { appid } = req.query;
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const { appid } = req.query;
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
-    if (!appid) {
-        return res.status(400).json({ error: 'Missing appid' });
+  if (!appid) {
+    return res.status(400).json({ error: 'Missing appid' });
+  }
+
+  const apiUrl = `https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs/${appid}.zip`;
+
+  try {
+    const apiRes = await fetch(apiUrl, {
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github.v3.raw'
+      }
+    });
+
+    if (!apiRes.ok) {
+      console.error(`GitHub API error: ${apiRes.status} ${apiRes.statusText}`);
+      return res.status(apiRes.status).json({ error: 'File not found or fetch error' });
     }
 
-    const apiUrl = `https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs/${appid}.zip`;
+    res.setHeader('Content-Type', 'application/zip');
+    res.setHeader('Content-Disposition', `attachment; filename="${appid}.zip"`);
 
-    try {
-        const apiRes = await fetch(apiUrl, {
-            method: 'GET',
-            headers: {
-                Authorization: `token ${GITHUB_TOKEN}`,
-                Accept: 'application/vnd.github.v3.raw'  // tell GitHub to send raw file
-            }
-        });
-
-        if (!apiRes.ok) {
-            return res.status(apiRes.status).json({ error: 'File not found or fetch error' });
-        }
-
-        // Stream raw response directly
-        res.setHeader('Content-Type', 'application/zip');
-        res.setHeader('Content-Disposition', `attachment; filename="${appid}.zip"`);
-
-        apiRes.body.pipe(res);
-    } catch (error) {
-        console.error('Error fetching file:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
+    apiRes.body.pipe(res);
+  } catch (error) {
+    console.error('Error fetching file:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 }

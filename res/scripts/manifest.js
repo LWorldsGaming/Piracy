@@ -94,12 +94,12 @@ function requestpage() {
     open("/manifest/request", "_self")
 }
 
-document.addEventListener('keydown', function (e) {
+/*document.addEventListener('keydown', function (e) {
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
         e.preventDefault();
         alert("nuh uh");
     }
-});
+});*/
 
 window.addEventListener('mousedown', function (e) {
     if (e.button === 2) {
