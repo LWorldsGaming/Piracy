@@ -1,5 +1,5 @@
-const Toastify = require('toastify-js');
-require('toastify-js/src/toastify.css');
+import Toastify from 'toastify-js';
+import 'toastify-js/src/toastify.css';
 
 const follower = document.querySelector('.cursor-follower');
 let mouseX = 0, mouseY = 0;
