@@ -7,7 +7,7 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN;  // add your token to env vars
 
 export default async function handler(req, res) {
   try {
-    const url = `https://api.github.com/repos/${GITHUB_REPO}/contents/${encodeURIComponent(FOLDER_PATH)}`;
+    const url = `https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs`;
     const response = await fetch(url, {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
