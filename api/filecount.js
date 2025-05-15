@@ -7,7 +7,7 @@ const REPO = 'database';
 const PATH = 'main'; // folder path you want to count files in
 
 async function getFileCount(owner, repo, path) {
-  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}/Games ZIPs`;
+  const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}/Games%20ZIPs`;
 
   const res = await fetch(url, {
     headers: {
