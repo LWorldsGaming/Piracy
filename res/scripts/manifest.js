@@ -19,7 +19,7 @@ function animateFollower() {
 
 animateFollower();
 
-function showToast(message, backgroundColor, duration = 1) {
+function showToast(message, backgroundColor, duration = 1.5) {
     const toast = document.getElementById("toast");
     toast.textContent = message;
     toast.style.opacity = "1";
@@ -49,7 +49,7 @@ async function generate() {
     if (!AppID) {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
         return
     }
     document.getElementById('genAppID').disabled = true;
