@@ -1,3 +1,4 @@
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Set this in your Vercel environment variables
 const OWNER = 'plxt79';
 const REPO = 'database';
 const FOLDER_PATH = 'Games ZIPs';
@@ -8,6 +9,7 @@ export default async function handler(req, res) {
     const response = await fetch(url, {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
+        'Authorization': `Bearer ${GITHUB_TOKEN}`,
       },
     });
 
@@ -17,15 +19,16 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    // Count only files (type === 'file')
     const fileCount = Array.isArray(data)
       ? data.filter(item => item.type === 'file').length
       : 0;
 
     res.status(200).json({
-      count: fileCount.toString(),
+      count: `${fileCount}`,
+      truecount: `${fileCount}`
     });
   } catch (err) {
+    console.error('Backend error:', err);
     res.status(500).json({ error: 'Failed to fetch file count' });
   }
 }
