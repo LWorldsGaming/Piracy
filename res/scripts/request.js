@@ -36,6 +36,13 @@ async function request() {
     const userid = document.getElementById("UserIDInput").value.trim();
     const appid = document.getElementById("AppIDInput").value.trim();
 
+    if (!userid && !appid) {
+        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
+    }
     if (!userid) {
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
@@ -43,13 +50,6 @@ async function request() {
     }
     if (!appid) {
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
-        return
-    }
-    if (userid === '' && appid === '') {
-        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
-        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
         return
     }
