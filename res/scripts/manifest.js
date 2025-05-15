@@ -45,39 +45,38 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 async function generate() {
-    const AppID = document.getElementById("AppIDInput").value.trim();
-    if (!AppID) {
-        showToast('Please fill all fields.', '#FF0000');
-        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
-        return
-    }
-    document.getElementById('genAppID').disabled = true;
-    const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
-
-    const response = await fetch(url, {
-        method: 'GET',
-        headers: {
-            'User-Agent': 'Mozilla/5.0'
+    async function generate() {
+        const AppID = document.getElementById("AppIDInput").value.trim();
+        if (!AppID) {
+            showToast('Please fill all fields.', '#FF0000');
+            document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
+            return;
         }
-    });
-    if (response.status === 200) {
-        const blob = await response.blob();
-        const link = document.createElement("a");
-        link.href = window.URL.createObjectURL(blob);
-        link.download = `${AppID}.zip`;
+        document.getElementById('genAppID').disabled = true;
 
-        showToast(`Generated App: ${AppID}`, '#00FF00')
+        // Call your backend API, which will add token and fetch the file
+        const url = `/api/generate?appid=${encodeURIComponent(AppID)}`;
 
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+        const response = await fetch(url);
+        if (response.status === 200) {
+            const blob = await response.blob();
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `${AppID}.zip`;
 
-        document.getElementById('genAppID').disabled = false;
-    } else {
-        showToast('AppID unavailable!', '#FF0000');
-        return
+            showToast(`Generated App: ${AppID}`, '#00FF00');
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            document.getElementById('genAppID').disabled = false;
+        } else {
+            showToast('AppID unavailable or error!', '#FF0000');
+            document.getElementById('genAppID').disabled = false;
+        }
     }
+
 }
 
 function home() {
