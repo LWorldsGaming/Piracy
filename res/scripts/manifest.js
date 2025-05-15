@@ -45,36 +45,34 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 async function generate() {
-    document.getElementById('genAppID').disabled = true;
-
     const AppID = document.getElementById("AppIDInput").value.trim();
     if (!AppID) {
-        const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
-
-        const response = await fetch(url, {
-            method: 'GET',
-            headers: {
-                'User-Agent': 'Mozilla/5.0'
-            }
-        });
-        if (response.status === 200) {
-            const blob = await response.blob();
-            const link = document.createElement("a");
-            link.href = window.URL.createObjectURL(blob);
-            link.download = `${AppID}.zip`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            
-            document.getElementById('genAppID').disabled = false;
-        } else {
-            showToast('AppID unavailable!', '#FF0000');
-        }
-    }
-    else {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
+    }
+    document.getElementById('genAppID').disabled = true;
+    const url = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${AppID}.zip`;
+
+    const response = await fetch(url, {
+        method: 'GET',
+        headers: {
+            'User-Agent': 'Mozilla/5.0'
+        }
+    });
+    if (response.status === 200) {
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = `${AppID}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        document.getElementById('genAppID').disabled = false;
+    } else {
+        showToast('AppID unavailable!', '#FF0000');
         return
     }
 }
