@@ -53,11 +53,7 @@ async function generate() {
         return;
     }
     document.getElementById('genAppID').disabled = true;
-    isGenerating = true;
-
-    if (isGenerating) {
-        document.getElementById("genAppID").style.borderColor = '#FFFF00'
-    }
+    document.getElementById("genAppID").style.borderColor = '#FFFF00'
 
     const url = `/api/download?appid=${encodeURIComponent(AppID)}`;
 
@@ -73,14 +69,11 @@ async function generate() {
         link.download = `${AppID}.zip`;
 
         showToast(`Generated App: ${AppID}`, '#00FF00');
+        document.getElementById("genAppID").style.borderColor = ""
 
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
-
-        if (!isGenerating) {
-            document.getElementById("genAppID").style.borderColor = ""
-        }
 
         document.getElementById('genAppID').disabled = false;
     } else {
