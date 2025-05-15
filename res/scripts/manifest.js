@@ -97,17 +97,30 @@ function home() {
     }
 }*/
 async function getFileCount() {
-    fetch('https://raw.githubusercontent.com/plxt79/blackbay/public/res/file-count.json')
-        .then(response => response.json())
-        .then(data => {
-            const fileCount = data["file-count"];
-            document.getElementById('file-count').textContent = fileCount;
-        })
-        .catch(error => {
-            console.error("Error fetching file-count:", error);
-            document.getElementById('file-count').textContent = "Error";
-        });
-}
+    const owner = 'plxt79';
+    const repo = 'blackbay';
+    const branch = 'public';
+
+    try {
+      // Step 1: Get the SHA of the specified branch
+      const branchResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/branches/${branch}`);
+      const branchData = await branchResponse.json();
+      const treeSha = branchData.commit.commit.tree.sha;
+
+      // Step 2: Fetch the entire tree recursively
+      const treeResponse = await fetch(`https://api.github.com/repos/${owner}/${repo}/git/trees/${treeSha}?recursive=1`);
+      const treeData = await treeResponse.json();
+
+      // Step 3: Count the number of files (type === 'blob')
+      const fileCount = treeData.tree.filter(item => item.type === 'blob').length;
+
+      // Display the file count
+      document.getElementById('file-count').textContent = fileCount;
+    } catch (error) {
+      console.error('Error fetching file count:', error);
+      document.getElementById('file-count').textContent = 'Error';
+    }
+  }
 
 getFileCount();
 
