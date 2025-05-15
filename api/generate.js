@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
   const { appid } = req.query;
-  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const GITHUB_TOKEN = process.env.GEN_TOKEN;
 
   if (!appid) {
     return res.status(400).json({ error: 'Missing appid' });
