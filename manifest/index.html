@@ -10,7 +10,9 @@
 </head>
 
 <body>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <div id="toast"
+        style="position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 12px 20px; border-radius: 8px; box-shadow: 0 0 10px #0005; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 9999;">
+    </div>
     <div class="cursor-follower"></div>
     <header>
         <button id="homeBtn" onclick="home()">Home</button>
