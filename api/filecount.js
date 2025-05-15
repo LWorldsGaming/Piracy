@@ -1,34 +1,36 @@
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // Set this in your Vercel environment variables
-const OWNER = 'plxt79';
-const REPO = 'database';
-const FOLDER_PATH = 'Games ZIPs';
+const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
 export default async function handler(req, res) {
   try {
-    const url = `https://api.github.com/repos/${OWNER}/${REPO}/contents/${encodeURIComponent(FOLDER_PATH)}`;
-    const response = await fetch(url, {
-      headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Authorization': `Bearer ${GITHUB_TOKEN}`,
-      },
-    });
-
-    if (!response.ok) {
-      return res.status(response.status).json({ error: `GitHub API error: ${response.statusText}` });
-    }
+    const response = await fetch(
+      `https://api.github.com/repos/plxt79/database/git/trees/main?recursive=1`,
+      {
+        headers: {
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json'
+        }
+      }
+    );
 
     const data = await response.json();
 
-    const fileCount = Array.isArray(data)
-      ? data.filter(item => item.type === 'file').length
-      : 0;
+    if (!data.tree) {
+      return res.status(500).json({ error: 'Invalid tree response' });
+    }
 
-    res.status(200).json({
-      count: `${fileCount}`,
-      truecount: `${fileCount}`
+    const files = data.tree.filter(
+      (item) => item.path.startsWith('Games ZIPs/') && item.type === 'blob'
+    );
+
+    const count = files.length;
+    const readable = count >= 1000 ? `${(count / 1000).toFixed(1)}K` : `${count}`;
+
+    return res.status(200).json({
+      count: readable,
+      truecount: count
     });
-  } catch (err) {
-    console.error('Backend error:', err);
-    res.status(500).json({ error: 'Failed to fetch file count' });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: 'Server error' });
   }
 }
