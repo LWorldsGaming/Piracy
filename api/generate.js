@@ -3,30 +3,36 @@ export default async function handler(req, res) {
   const GITHUB_TOKEN = process.env.GEN_TOKEN;
 
   if (!appid) {
-    return res.status(400).json({ error: 'Missing appid' });
+    res.status(400).json({ error: 'Missing appid' });
+    return;
   }
 
-  const apiUrl = `https://api.github.com/repos/plxt79/database/contents/${encodeURIComponent('Games ZIPs')}/${appid}.zip`;
+  const githubUrl = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${appid}.zip`;
 
   try {
-    const apiRes = await fetch(apiUrl, {
+    const githubRes = await fetch(githubUrl, {
       headers: {
         Authorization: `token ${GITHUB_TOKEN}`,
         Accept: 'application/vnd.github.v3.raw'
       }
     });
 
-    if (!apiRes.ok) {
-      console.error(`GitHub API error: ${apiRes.status} ${apiRes.statusText}`);
-      return res.status(apiRes.status).json({ error: 'File not found or fetch error' });
+    if (!githubRes.ok) {
+      const errorText = await githubRes.text();
+      console.error('GitHub fetch error:', githubRes.status, errorText);
+      res.status(githubRes.status).json({ error: 'File not found or fetch error', details: errorText });
+      return;
     }
+
+    const buffer = await githubRes.arrayBuffer();
 
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename="${appid}.zip"`);
+    res.setHeader('Content-Length', buffer.byteLength);
 
-    apiRes.body.pipe(res);
+    res.status(200).send(Buffer.from(buffer));
   } catch (error) {
     console.error('Error fetching file:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: 'Internal server error', details: error.message });
   }
 }
