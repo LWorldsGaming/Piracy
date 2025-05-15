@@ -39,10 +39,12 @@ async function request() {
     if (!userid) {
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
     }
     if (!appid) {
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        return
     }
 
     const filename = `${appid}.zip`;
@@ -70,7 +72,7 @@ async function request() {
 
     const webhookURL = "https://discord.com/api/webhooks/1361770759080378479/FOTIsFeFhRKk0ltgkEPnKofdGfY3OJ_RX1exlKBB9jdfU1cHmIGb-Ojig6WsV8YweWy-";
     const payload = {
-        content: `# New Game Request\n**AppID: \`${appid}\`**\n**User: <@${userid}>**\n-# 🌐 IP: \`${ip}\``
+        content: `# AppID: \`${appid}\`\n**User: <@${userid}>**\n-# 🌐 IP: \`${ip}\``
     };
 
     const webhookRes = await fetch(webhookURL, {
