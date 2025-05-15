@@ -1,4 +1,4 @@
-import Toastify from 'toastify-js'
+import Toastify from 'toastify-js';
 
 const follower = document.querySelector('.cursor-follower');
 let mouseX = 0, mouseY = 0;
