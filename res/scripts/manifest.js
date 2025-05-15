@@ -97,7 +97,11 @@ function home() {
     }
 }*/
 async function getFileCount() {
-    
+    fetch('https://blackbay.vercel.app/api/filecount')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("file-count").textContent = data.count;
+        });
 }
 
 getFileCount();
