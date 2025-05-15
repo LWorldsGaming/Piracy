@@ -55,7 +55,7 @@ async function generate() {
     document.getElementById('genAppID').disabled = true;
 
     // Call your backend API, which will add token and fetch the file
-    const url = `/api/generate?appid=${encodeURIComponent(AppID)}`;
+    const url = `/api/download?appid=${encodeURIComponent(AppID)}`;
 
     const response = await fetch(url);
     if (response.status === 200) {
@@ -94,12 +94,12 @@ function requestpage() {
     open("/manifest/request", "_self")
 }
 
-/*document.addEventListener('keydown', function (e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
         e.preventDefault();
         alert("nuh uh");
     }
-});*/
+});
 
 window.addEventListener('mousedown', function (e) {
     if (e.button === 2) {
