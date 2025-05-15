@@ -3,8 +3,8 @@ import fetch from 'node-fetch';
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN; // set this in your env
 
 const OWNER = 'plxt79';
-const REPO = 'blackbay';
-const PATH = 'public'; // folder path you want to count files in
+const REPO = 'database';
+const PATH = 'main'; // folder path you want to count files in
 
 async function getFileCount(owner, repo, path) {
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${path}/Games ZIPs`;
