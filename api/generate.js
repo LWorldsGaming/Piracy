@@ -12,9 +12,9 @@ export default async function handler(req, res) {
   try {
     const githubRes = await fetch(githubUrl, {
       headers: {
-        Authorization: `token ${GITHUB_TOKEN}`,
-        'User-Agent': 'Vercel-App'
-      }
+          Authorization: `Bearer ${GITHUB_TOKEN}`,
+          Accept: 'application/vnd.github.v3+json'
+        }
     });
 
     if (!githubRes.ok) {
