@@ -35,15 +35,23 @@ document.querySelectorAll('a, button, a').forEach(el => {
 async function request() {
     const appid = document.getElementById("AppIDInput").value.trim();
     const userid = document.getElementById("UserIDInput").value.trim();
-    if (!appid) return alert("Please enter a valid AppID");
-    if (userid === "") return alert("Please enter your Discord UserID");
+    if (!appid) {
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+    }
+    if (!userid) {
+        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
+    }
 
     const filename = `${appid}.zip`;
 
     try {
         const res = await fetch(`https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${filename}`, { method: 'HEAD' });
         if (res.status === 200) {
-            return alert("This game is already available!");
+            alert("This game is already available!");
+            document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
+            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
         }
     } catch (e) {
         return alert("Could not check file status.");
@@ -74,7 +82,8 @@ async function request() {
         document.getElementById("submitRequest").style.borderColor = '#00FF00'
         setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 1000);
     } else {
-        alert("Failed to send request.");
+        document.getElementById("submitRequest").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = '#404040DD'; }, 1000);
     }
 }
 
