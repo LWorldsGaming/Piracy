@@ -1,33 +1,32 @@
+import fetch from 'node-fetch'; // optional in old Node, but recommended in some envs
+
 export default async function handler(req, res) {
   const { appid } = req.query;
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 
   if (!appid) {
-    res.status(400).json({ error: 'Missing appid' });
-    return;
+    return res.status(400).json({ error: 'Missing appid' });
   }
 
-  const githubUrl = `https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${appid}.zip`;
+  const apiUrl = `https://api.github.com/repos/plxt79/database/contents/Games%20ZIPs/${appid}.zip`;
 
   try {
-    const githubRes = await fetch(githubUrl, {
+    const apiRes = await fetch(apiUrl, {
       headers: {
-          Authorization: `Bearer ${GITHUB_TOKEN}`,
-          Accept: 'application/vnd.github.v3+json'
-        }
+        Authorization: `token ${GITHUB_TOKEN}`,
+        Accept: 'application/vnd.github.v3.raw'  // tell GitHub to send raw file
+      }
     });
 
-    if (!githubRes.ok) {
-      res.status(githubRes.status).json({ error: 'File not found or fetch error' });
-      return;
+    if (!apiRes.ok) {
+      return res.status(apiRes.status).json({ error: 'File not found or fetch error' });
     }
 
-    // Set headers to force download
+    // Stream raw response directly
     res.setHeader('Content-Type', 'application/zip');
     res.setHeader('Content-Disposition', `attachment; filename="${appid}.zip"`);
 
-    // Stream the response body directly to the client
-    githubRes.body.pipe(res);
+    apiRes.body.pipe(res);
   } catch (error) {
     console.error('Error fetching file:', error);
     res.status(500).json({ error: 'Internal server error' });
