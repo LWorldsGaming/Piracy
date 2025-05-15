@@ -49,7 +49,7 @@ async function generate() {
     if (!AppID) {
         showToast('Please fill all fields.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 2000);
         return
     }
     document.getElementById('genAppID').disabled = true;
