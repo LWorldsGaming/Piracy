@@ -66,6 +66,9 @@ async function generate() {
         const link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = `${AppID}.zip`;
+
+        showToast(`Generated ${AppID}`, '#00FF00')
+
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
