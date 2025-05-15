@@ -33,15 +33,16 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 async function request() {
-    const appid = document.getElementById("AppIDInput").value.trim();
     const userid = document.getElementById("UserIDInput").value.trim();
-    if (!appid) {
-        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
-    }
+    const appid = document.getElementById("AppIDInput").value.trim();
+
     if (!userid) {
         document.getElementById("UserIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = '#404040DD'; }, 1000);
+    }
+    if (!appid) {
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = '#404040DD'; }, 1000);
     }
 
     const filename = `${appid}.zip`;
