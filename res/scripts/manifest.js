@@ -69,6 +69,7 @@ async function generate() {
         link.download = `${AppID}.zip`;
 
         showToast(`Generated App: ${AppID}`, '#00FF00');
+        document.getElementById("genAppID").style.borderColor = ""
 
         document.body.appendChild(link);
         link.click();
@@ -115,6 +116,9 @@ window.addEventListener('mousedown', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
+        if (document.getElementById('genAppID').disabled === true) {
+            e.preventDefault()
+        }
         generate();
     }
 });
