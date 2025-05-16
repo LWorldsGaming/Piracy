@@ -137,3 +137,9 @@ document.addEventListener('keydown', function (e) {
 
 window.addEventListener("load", syncUserIDWidth);
 window.addEventListener("resize", syncUserIDWidth);
+
+const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+if (isMobile) {
+    document.body.innerHTML = "Access denied. Desktop only.";
+}

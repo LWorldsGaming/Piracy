@@ -127,3 +127,9 @@ document.addEventListener('keydown', function (e) {
         }
     }
 });
+
+const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+if (isMobile) {
+    document.body.innerHTML = "Access denied. Desktop only.";
+}
