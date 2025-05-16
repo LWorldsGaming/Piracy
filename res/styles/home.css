@@ -117,6 +117,7 @@ h6 {
     transition: all 0.5s ease;
     -webkit-text-stroke: 0.1vh transparent;
     font-family: "Gyasco";
+    letter-spacing: 0.05em;
 }
 
 h1:hover,
