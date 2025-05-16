@@ -41,10 +41,9 @@ function manifestGen() {
     var URL = "/manifest"
     open(URL, "_self")
 }
-/*
+
 const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 if (isMobile) {
     document.body.innerHTML = "Access denied. Desktop only.";
 }
-*/
