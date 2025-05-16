@@ -78,10 +78,11 @@ a {
     color: #0085C5;
     margin: 10px 0;
     text-align: center;
+    filter: drop-shadow(2px 4px 6px #0085C500);
 }
 
 a:hover {
-    filter: drop-shadow(0 0 10px #0085C5) drop-shadow(0 0 20px #0085C5);
+    filter: drop-shadow(2px 4px 6px #0085C5);
 }
 
 .cursor-follower {
