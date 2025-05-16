@@ -76,10 +76,11 @@ async function generate() {
         document.body.removeChild(link);
 
         document.getElementById('genAppID').disabled = false;
-        return
+        return;
     } else {
         showToast('AppID unavailable or error!', '#FF0000');
         document.getElementById('genAppID').disabled = false;
+        return;
     }
 }
 
@@ -119,9 +120,10 @@ document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         if (document.getElementById('genAppID').disabled !== true) {
             generate();
+            return;
         }
         else {
-            return
+            return;
         }
     }
 });
