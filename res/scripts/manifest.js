@@ -69,7 +69,6 @@ async function generate() {
         link.download = `${AppID}.zip`;
 
         showToast(`Generated App: ${AppID}`, '#00FF00');
-        document.getElementById("genAppID").style.borderColor = ""
 
         document.body.appendChild(link);
         link.click();
