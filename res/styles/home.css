@@ -81,7 +81,7 @@ a {
 }
 
 a:hover {
-    filter: drop-shadow(10px 7px 10px #0085C5);
+    filter: drop-shadow(0 0 10px #0085C5) drop-shadow(0 0 20px #0085C5);
 }
 
 .cursor-follower {
