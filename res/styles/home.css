@@ -81,7 +81,7 @@ a {
 }
 
 a:hover {
-    box-shadow: 2px 4px 6px #0085C5;
+    transform: scale(1.2);
 }
 
 .cursor-follower {
