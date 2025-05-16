@@ -76,6 +76,7 @@ async function generate() {
         document.body.removeChild(link);
 
         document.getElementById('genAppID').disabled = false;
+        return
     } else {
         showToast('AppID unavailable or error!', '#FF0000');
         document.getElementById('genAppID').disabled = false;
@@ -116,9 +117,11 @@ window.addEventListener('mousedown', function (e) {
 
 document.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
-        if (document.getElementById('genAppID').disabled === true) {
-            e.preventDefault()
+        if (document.getElementById('genAppID').disabled !== true) {
+            generate();
         }
-        generate();
+        else {
+            return
+        }
     }
 });
