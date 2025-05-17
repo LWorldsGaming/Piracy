@@ -50,69 +50,57 @@ async function request() {
 
     if (!userid && !appid) {
         showToast('Please fill all fields.', '#FF0000');
-        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
-        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = ""; }, 1500);
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
-        return
+        document.getElementById("UserIDInput").style.borderColor = '#FF0000';
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000';
+        setTimeout(() => document.getElementById("UserIDInput").style.borderColor = "", 1500);
+        setTimeout(() => document.getElementById("AppIDInput").style.borderColor = "", 1500);
+        return;
     }
+
     if (!userid) {
         showToast('Please fill all fields.', '#FF0000');
-        document.getElementById("UserIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("UserIDInput").style.borderColor = ""; }, 1500);
-        return
+        document.getElementById("UserIDInput").style.borderColor = '#FF0000';
+        setTimeout(() => document.getElementById("UserIDInput").style.borderColor = "", 1500);
+        return;
     }
+
     if (!appid) {
         showToast('Please fill all fields.', '#FF0000');
-        document.getElementById("AppIDInput").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
-        return
+        document.getElementById("AppIDInput").style.borderColor = '#FF0000';
+        setTimeout(() => document.getElementById("AppIDInput").style.borderColor = "", 1500);
+        return;
     }
 
-    const filename = `${appid}.zip`;
-
     try {
-        const res = await fetch(`https://raw.githubusercontent.com/plxt79/database/main/Games%20ZIPs/${filename}`, { method: 'HEAD' });
-        if (res.status === 200) {
-            showToast("Game already available.", "#FFFF00");
+        const res = await fetch('/api/request', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ appid, userid })
+        });
 
-            document.getElementById("AppIDInput").style.borderColor = '#FFFF00'
-            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
-            return
+        const data = await res.json();
+
+        if (!res.ok) {
+            showToast(data.error || 'An error occurred.', '#FF0000');
+            document.getElementById("submitRequest").style.borderColor = '#FF0000';
+            setTimeout(() => document.getElementById("submitRequest").style.borderColor = "", 1500);
+            return;
         }
-    } catch (e) {
-        return alert("Could not check file status.");
-    }
 
-    let ip = "Unknown";
-    try {
-        const ipRes = await fetch("https://api.ipify.org?format=json");
-        const ipData = await ipRes.json();
-        ip = ipData.ip;
-    } catch (e) {
-        console.warn("Could not fetch IP", e);
-    }
+        if (data.message === "Game already available.") {
+            showToast(data.message, "#FFFF00");
+            document.getElementById("AppIDInput").style.borderColor = '#FFFF00';
+            setTimeout(() => document.getElementById("AppIDInput").style.borderColor = "", 1500);
+        } else {
+            showToast('Request sent!', '#00FF00');
+            document.getElementById("AppIDInput").value = "";
+            document.getElementById("submitRequest").style.borderColor = '#00FF00';
+            setTimeout(() => document.getElementById("submitRequest").style.borderColor = "", 1500);
+        }
 
-    const webhookURL = "https://discord.com/api/webhooks/1361770759080378479/FOTIsFeFhRKk0ltgkEPnKofdGfY3OJ_RX1exlKBB9jdfU1cHmIGb-Ojig6WsV8YweWy-";
-    const payload = {
-        content: `# AppID: \`${appid}\`\n**User: <@${userid}>**\n-# 🌐 IP: \`${ip}\``
-    };
-
-    const webhookRes = await fetch(webhookURL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-    });
-
-    if (webhookRes.ok) {
-        showToast('Request sent!', '#00FF00')
-        document.getElementById("AppIDInput").value = "";
-        document.getElementById("submitRequest").style.borderColor = '#00FF00'
-        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = ""; }, 1500);
-    } else {
-        showToast('An error occured.', '#FF0000')
-        document.getElementById("submitRequest").style.borderColor = '#FF0000'
-        setTimeout(() => { document.getElementById("submitRequest").style.borderColor = ""; }, 1500);
+    } catch (err) {
+        showToast('Something went wrong.', '#FF0000');
+        console.error(err);
     }
 }
 
