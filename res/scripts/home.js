@@ -42,8 +42,27 @@ function manifestGen() {
     open(URL, "_self")
 }
 
-const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+function isMobileAdvanced() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
 
-if (isMobile) {
-    document.body.innerHTML = "Access denied. Desktop only.";
+    // Base check (user agent)
+    const userAgentMatch = /android|iphone|ipad|iPod|blackberry|iemobile|opera mini/i.test(ua);
+
+    // Touch screen check
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 1;
+
+    // Screen dimensions
+    const isSmallScreen = Math.max(window.innerWidth, window.innerHeight) <= 800;
+
+    return userAgentMatch || hasTouch || isSmallScreen;
+}
+
+if (isMobileAdvanced()) {
+    document.body.innerHTML = `
+      <style>body { margin: 0; background: black; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }</style>
+      <h1>Access denied. Desktop only.</h1>
+    `;
+
+    // Optional redirect
+    // window.location.href = "https://yourdomain.com/desktop-required";
 }

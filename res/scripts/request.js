@@ -126,8 +126,12 @@ document.addEventListener('keydown', function (e) {
 window.addEventListener("load", syncUserIDWidth);
 window.addEventListener("resize", syncUserIDWidth);
 
-const isMobile = /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+if (isMobileAdvanced()) {
+    document.body.innerHTML = `
+      <style>body { margin: 0; background: black; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }</style>
+      <h1>Access denied. Desktop only.</h1>
+    `;
 
-if (isMobile) {
-    document.body.innerHTML = "Access denied. Desktop only.";
+    // Optional redirect
+    // window.location.href = "https://yourdomain.com/desktop-required";
 }
