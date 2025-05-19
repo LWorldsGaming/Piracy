@@ -60,7 +60,7 @@ function isMobileAdvanced() {
 if (isMobileAdvanced()) {
     document.body.innerHTML = `
       <style>body { margin: 0; background: black; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }</style>
-      <h1>Access denied. Desktop only.</h1>
+      Access denied. Desktop only.
     `;
 
     // Optional redirect
