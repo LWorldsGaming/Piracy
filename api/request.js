@@ -27,7 +27,7 @@ export default async function handler(req, res) {
         content: `# AppID: \`${appid}\`\n**User: <@${userid}>**\n-# 🌐 IP: \`${ip}\``
     };
 
-    const webhookURL = "https://discord.com/api/webhooks/1361770759080378479/FOTIsFeFhRKk0ltgkEPnKofdGfY3OJ_RX1exlKBB9jdfU1cHmIGb-Ojig6WsV8YweWy-";
+    const webhookURL = "https://discord.com/api/webhooks/1373936167917060106/sQ6oZXlLJsYJEOK6VLNjlDbt6unKUVBFKBluI4gRiqe-njNkxKLCtiusZdGzGk3w84PD";
 
     try {
         const discordRes = await fetch(webhookURL, {
