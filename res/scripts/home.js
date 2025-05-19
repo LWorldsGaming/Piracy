@@ -42,7 +42,7 @@ function manifestGen() {
     open(URL, "_self")
 }
 
-function isMobileAdvanced() {
+function isMobile() {
     const ua = navigator.userAgent || navigator.vendor || window.opera;
 
     // Base check (user agent)
@@ -57,11 +57,8 @@ function isMobileAdvanced() {
     return userAgentMatch || hasTouch || isSmallScreen;
 }
 
-if (isMobileAdvanced()) {
-    document.body.innerHTML = `
-      <style>body { margin: 0; background: black; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }</style>
-      Access denied. Desktop only.
-    `;
+if (isMobile()) {
+    document.body.innerHTML = "Access denied. Desktop only.";
 
     // Optional redirect
     // window.location.href = "https://yourdomain.com/desktop-required";

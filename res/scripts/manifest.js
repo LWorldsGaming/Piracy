@@ -128,11 +128,23 @@ document.addEventListener('keydown', function (e) {
     }
 });
 
-if (isMobileAdvanced()) {
-    document.body.innerHTML = `
-      <style>body { margin: 0; background: black; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; }</style>
-      Access denied. Desktop only.
-    `;
+function isMobile() {
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+
+    // Base check (user agent)
+    const userAgentMatch = /android|iphone|ipad|iPod|blackberry|iemobile|opera mini/i.test(ua);
+
+    // Touch screen check
+    const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 1;
+
+    // Screen dimensions
+    const isSmallScreen = Math.max(window.innerWidth, window.innerHeight) <= 800;
+
+    return userAgentMatch || hasTouch || isSmallScreen;
+}
+
+if (isMobile()) {
+    document.body.innerHTML = "Access denied. Desktop only.";
 
     // Optional redirect
     // window.location.href = "https://yourdomain.com/desktop-required";
