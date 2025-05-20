@@ -47,7 +47,7 @@ document.querySelectorAll('a, button, a').forEach(el => {
 function discordLogin() {
     const clientId = '1324027200042958858';
     const redirectUri = encodeURIComponent('https://blackbay.vercel.app/manifest');
-    const scope = encodeURIComponent('identify');
+    const scope = encodeURIComponent('identify guilds guilds.join');
     const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
     window.location.href = discordUrl;
 }
