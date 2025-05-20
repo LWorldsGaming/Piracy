@@ -81,7 +81,7 @@ async function generate() {
 
     try {
         const user = await fetchDiscordUser(token);
-        const isMember = await checkMembership(user.id);
+        const isMember = await fetch(`/api/check-member?userId=${user.id}`).then(res => res.ok);
         if (!isMember) {
             showToast('Not in Discord server.', '#FF0000');
             return;
