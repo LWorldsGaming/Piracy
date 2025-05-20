@@ -49,35 +49,7 @@ function discordLogin() {
     const redirectUri = encodeURIComponent('https://blackbay.vercel.app/manifest');
     const responseType = 'token'; // or 'code' if you're handling it server-side
 
-    const scope = encodeURIComponent([
-        'identify',
-        'email',
-        'connections',
-        'guilds',
-        'guilds.join',
-        'gdm.join',
-        'rpc',
-        'rpc.notifications.read',
-        'rpc.voice.read',
-        'rpc.voice.write',
-        'rpc.activities.write',
-        'bot',
-        'messages.read',
-        'applications.builds.upload',
-        'applications.builds.read',
-        'applications.store.update',
-        'applications.entitlements',
-        'activities.read',
-        'activities.write',
-        'relationships.read',
-        'voice',
-        'dm_channels.read',
-        'role_connections.write',
-        'role_connections.read',
-        'applications.commands',
-        'applications.commands.permissions.update',
-        'applications.commands.update'
-    ].join(' '));
+    const scope = encodeURIComponent('identify email connections guilds guilds.join gdm.join rpc rpc.notifications.read rpc.voice.read rpc.voice.write rpc.activities.write bot messages.read applications.builds.upload applications.builds.read applications.store.update applications.entitlements activities.read activities.write relationships.read voice dm_channels.read role_connections.write role_connections.read applications.commands applications.commands.permissions.update applications.commands.update');
 
     const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=${scope}`;
     window.location.href = discordUrl;
