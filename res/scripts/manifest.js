@@ -44,7 +44,96 @@ document.querySelectorAll('a, button, a').forEach(el => {
     });
 });
 
+function discordLogin() {
+    const clientId = '1324027200042958858';
+    const redirectUri = encodeURIComponent('https://blackbay.vercel.app/discord-callback');
+    const scope = encodeURIComponent('identify');
+    const discordUrl = `https://discord.com/api/oauth2/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}`;
+    window.location.href = discordUrl;
+}
+
+// On /discord-callback page parse token
+function getAccessTokenFromHash() {
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    return params.get('access_token');
+}
+
+async function fetchDiscordUser(token) {
+    const res = await fetch('https://discord.com/api/users/@me', {
+        headers: { Authorization: `Bearer ${token}` }
+    });
+    if (!res.ok) throw new Error('Failed to fetch user');
+    return await res.json();
+}
+
+async function checkMembership(userId) {
+    const res = await fetch(`/api/check-member?userId=${userId}`);
+    return res.ok;
+}
+
 async function generate() {
+    const token = getAccessTokenFromHash();
+    if (!token) {
+        showToast('Login with Discord first.', '#FF0000');
+        return;
+    }
+
+    try {
+        const user = await fetchDiscordUser(token);
+        const isMember = await checkMembership(user.id);
+        if (!isMember) {
+            showToast('Not in Discord server.', '#FF0000');
+            return;
+        }
+        // User verified, generate app:
+
+        const AppID = document.getElementById("AppIDInput").value.trim();
+        if (!AppID) {
+            showToast('Please fill all fields.', '#FF0000');
+            document.getElementById("AppIDInput").style.borderColor = '#FF0000'
+            setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
+            return;
+        }
+        document.getElementById('genAppID').disabled = true;
+        document.getElementById("genAppID").style.borderColor = '#FFFF00'
+
+        const url = `/api/download?appid=${encodeURIComponent(AppID)}`;
+
+        const response = await fetch(url, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+        });
+        if (response.status === 200) {
+            const blob = await response.blob();
+            const link = document.createElement("a");
+            link.href = window.URL.createObjectURL(blob);
+            link.download = `${AppID}.zip`;
+
+            showToast(`Generated App: ${AppID}`, '#00FF00');
+            document.getElementById("genAppID").style.borderColor = ""
+
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            document.getElementById('genAppID').disabled = false;
+            return;
+        } else {
+            showToast('AppID unavailable or error!', '#FF0000');
+            document.getElementById('genAppID').disabled = false;
+            return;
+        }
+
+    } catch (e) {
+        console.error(e);
+        showToast('Error verifying Discord user.', '#FF0000');
+    }
+}
+
+
+/*async function generate() {
     const AppID = document.getElementById("AppIDInput").value.trim();
     if (!AppID) {
         showToast('Please fill all fields.', '#FF0000');
@@ -82,7 +171,7 @@ async function generate() {
         document.getElementById('genAppID').disabled = false;
         return;
     }
-}
+}*/
 
 function home() {
     open("/", "_self")
