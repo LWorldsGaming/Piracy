@@ -5,6 +5,9 @@ export default async function handler(req, res) {
     const forwardedFor = req.headers['x-forwarded-for'];
     const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress;
 
+    console.log('Referer:', referer);
+    console.log('Client IP:', clientIp);
+
     if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126') {
         return res.status(403).json({ error: 'Access denied' });
     }
