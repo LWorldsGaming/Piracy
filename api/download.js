@@ -4,19 +4,19 @@ export default async function handler(req, res) {
     const referer = req.headers.referer || '';
     const forwardedFor = req.headers['x-forwarded-for'];
     const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress || '';
+    const isAjax = req.headers['x-requested-with'] === 'XMLHttpRequest';
+    const isBrowser = req.headers['user-agent']?.includes('Mozilla');
 
-    console.log('All headers:', req.headers);
-    console.log('Referer:', referer);
     console.log('Client IP:', clientIp);
 
     const allowedIps = ['192.168.29.126', '152.59.87.191'];
 
     if (!referer.startsWith('https://blackbay.vercel.app') && !allowedIps.includes(clientIp)) {
-        return res.status(403).json({ error: 'Access denied (bad referer or IP)' });
+        return res.status(403).json({ error: 'Access denied' });
     }
 
-    if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
-        return res.status(403).json({ error: 'Access denied (bad request type)' });
+    if (!isAjax && !isBrowser) {
+        return res.status(403).json({ error: 'Access denied' });
     }
 
     if (!appid) {
