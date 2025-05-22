@@ -2,6 +2,8 @@ export default async function handler(req, res) {
     const { appid } = req.query;
     const GITHUB_TOKEN = process.env.GEN_TOKEN;
     const referer = req.headers.referer || '';
+    const forwardedFor = req.headers['x-forwarded-for'];
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress;
 
     if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126') {
         return res.status(403).json({ error: 'Access denied' });
