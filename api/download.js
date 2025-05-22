@@ -3,17 +3,19 @@ export default async function handler(req, res) {
     const GITHUB_TOKEN = process.env.GEN_TOKEN;
     const referer = req.headers.referer || '';
     const forwardedFor = req.headers['x-forwarded-for'];
-    const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress;
+    const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress || '';
 
     console.log('Referer:', referer);
     console.log('Client IP:', clientIp);
 
-    if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126,152.59.87.191') {
-        return res.status(403).json({ error: 'Access denied' });
+    const allowedIps = ['192.168.29.126', '152.59.87.191'];
+
+    if (!referer.startsWith('https://blackbay.vercel.app') && !allowedIps.includes(clientIp)) {
+        return res.status(403).json({ error: 'Access denied (bad referer or IP)' });
     }
 
     if (req.headers['x-requested-with'] !== 'XMLHttpRequest') {
-        return res.status(403).json({ error: 'Access denied' });
+        return res.status(403).json({ error: 'Access denied (bad request type)' });
     }
 
     if (!appid) {
