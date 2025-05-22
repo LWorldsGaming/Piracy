@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     console.log('Referer:', referer);
     console.log('Client IP:', clientIp);
 
-    if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126') {
+    if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126,152.59.87.191') {
         return res.status(403).json({ error: 'Access denied' });
     }
 
