@@ -5,6 +5,7 @@ export default async function handler(req, res) {
     const forwardedFor = req.headers['x-forwarded-for'];
     const clientIp = forwardedFor ? forwardedFor.split(',')[0].trim() : req.connection.remoteAddress || '';
 
+    console.log('All headers:', req.headers);
     console.log('Referer:', referer);
     console.log('Client IP:', clientIp);
 
