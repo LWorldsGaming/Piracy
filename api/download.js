@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     const GITHUB_TOKEN = process.env.GEN_TOKEN;
     const referer = req.headers.referer || '';
 
-    if (!referer.startsWith('https://blackbay.vercel.app')) {
+    if (!referer.startsWith('https://blackbay.vercel.app') && clientIp !== '192.168.29.126') {
         return res.status(403).json({ error: 'Access denied' });
     }
 
