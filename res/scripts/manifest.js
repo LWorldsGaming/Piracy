@@ -108,11 +108,13 @@ function requestpage() {
 }
 
 document.addEventListener('keydown', function (e) {
-    const isDevToolsShortcut =
-        (e.key === 'F12') ||
-        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()));
+    const key = e.key.toUpperCase();
 
-    if (isDevToolsShortcut) {
+    const isBlocked =
+        key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && (key === 'I' || key === 'J' || key === 'C'));
+
+    if (isBlocked) {
         e.preventDefault();
         alert("nuh uh");
     }
