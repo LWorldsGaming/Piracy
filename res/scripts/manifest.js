@@ -45,9 +45,14 @@ document.querySelectorAll('a, button, a').forEach(el => {
 });
 
 async function generate() {
-    const AppID = document.getElementById("AppIDInput").value.trim();
+    let input = document.getElementById("AppIDInput").value.trim();
+
+    const urlMatch = input.match(/^https?:\/\/store\.steampowered\.com\/app\/(\d+)/);
+    const isNumeric = /^\d+$/.test(input);
+    const AppID = urlMatch ? urlMatch[1] : (isNumeric ? input : null);
+
     if (!AppID) {
-        showToast('Please fill all fields.', '#FF0000');
+        showToast('Invalid input.', '#FF0000');
         document.getElementById("AppIDInput").style.borderColor = '#FF0000'
         setTimeout(() => { document.getElementById("AppIDInput").style.borderColor = ""; }, 1500);
         return;
