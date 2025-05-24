@@ -108,7 +108,11 @@ function requestpage() {
 }
 
 document.addEventListener('keydown', function (e) {
-    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+    const isDevToolsShortcut =
+        (e.key === 'F12') ||
+        (e.ctrlKey && e.shiftKey && ['I', 'J', 'C'].includes(e.key.toUpperCase()));
+
+    if (isDevToolsShortcut) {
         e.preventDefault();
         alert("nuh uh");
     }
