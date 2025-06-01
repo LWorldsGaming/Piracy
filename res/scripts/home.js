@@ -11,8 +11,7 @@ function animateFollower() {
     posX += (mouseX - posX) * 0.1;
     posY += (mouseY - posY) * 0.1;
 
-    const rect = follower.getBoundingClientRect();
-    if (rect.left === 0 && rect.top === 0) {
+    if (follower.style.posX === 0 && follower.style.posY === 0) {
         follower.style.color = 'transparent';
     }
 
