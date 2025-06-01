@@ -12,7 +12,7 @@ function animateFollower() {
     posY += (mouseY - posY) * 0.1;
 
     if (mouseX === 0 && mouseY === 0) {
-        follower.style.color = 'transparent';
+        follower.style.display = 'none';
     }
 
     follower.style.left = posX + 'px';
